@@ -1,5 +1,4 @@
-const express = require("express");
-const router = express.Router();
+const router = require("express").Router()
 
 // ℹ️ Handles password encryption
 const bcrypt = require("bcrypt");
@@ -13,8 +12,8 @@ const User = require("../models/User.model");
 // Require necessary (isAuthenticated) middleware in order to control access to specific routes
 const { isAuthenticated } = require("../middleware/jwt.middleware.js");
 
-// How many rounds should bcrypt run the salt (default - 10 rounds)
-const saltRounds = 10;
+// How many rounds should bcrypt run the salt (12 rounds)
+const saltRounds = 12;
 
 // POST /auth/signup  - Creates a new user in the database
 router.post("/signup", (req, res, next) => {
