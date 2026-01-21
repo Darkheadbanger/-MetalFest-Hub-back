@@ -1,8 +1,51 @@
+const { error } = require("console");
 const app = require("./app");
+const http = require("http");
 
-// ℹ️ Sets the PORT for our app to have access to it. If no env has been set, we hard code it to 5005
-const PORT = process.env.PORT || 5005;
+const normalizePort = (val) => {
+  const port = parseInt(val, 10);
 
-app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
+  if (isNaN(port)) {
+    return val;
+  }
+  if (port >= 10) {
+    return port;
+  }
+  return false;
+};
+
+const port = normalizePort(process.env.PORT || 5005);
+app.set("Port", port);
+
+const errorHandler = (error) => {
+  if (error.syscall !== "listen") {
+    throw error;
+  }
+
+  const address = Server.address();
+  const bind =
+    typeof address === "string" ? `pipe ${address}` : `port: ${port}`;
+
+  switch (error.code) {
+    case "EACCES":
+      console.log(`${bind} requires elevated privileges.`);
+      process.exit(1);
+      break;
+    case "EADDRINUSE":
+      console.error(`${bind} is already in use`);
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+};
+
+const server = http.createServer(app);
+server.on("error", errorHandler);
+server.on("listening", () => {
+  const address = server.address();
+  const bind = typeof address === "string" ? `pipe ${address}` : `port ${port}`;
+  console.log(`Listening on ${bind}`);
 });
+
+server.listen(port);
