@@ -1,0 +1,6 @@
+[0121/175548.012:ERROR:third_party\crashpad\crashpad\client\crashpad_client_win.cc:188] crash server did not respond, self-terminating
+[0121/175551.333:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Le fichier spécifié est introuvable. (0x2)
+[0121/175551.604:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Le fichier spécifié est introuvable. (0x2)
+[0121/175552.082:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Le fichier spécifié est introuvable. (0x2)
+[0121/180349.873:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Le fichier spécifié est introuvable. (0x2)
+[0121/181336.958:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Le fichier spécifié est introuvable. (0x2)
