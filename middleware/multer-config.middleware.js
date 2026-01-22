@@ -11,11 +11,15 @@ const storage = multer.diskStorage({
     callback(null, "images");
   },
   filename: (req, file, callback) => {
-    const name = file.originalname.split(" ").join("_");
-    if (MIME_TYPES) {
-      const extension = MIME_TYPES[file.mimetype];
-      callback(null, `${name} ${Date.now()}.${extension}`);
+    // sanitize original name, remove spaces and unsafe chars
+    const rawName = file.originalname.split(".").slice(0, -1).join(".");
+    const safeName = rawName.split(" ").join("_").replace(/[^a-zA-Z0-9_\-\.]/g, "");
+    const extension = MIME_TYPES[file.mimetype];
+    if (!extension) {
+      return callback(new Error("Invalid file type"));
     }
+    const filename = `${safeName}_${Date.now()}.${extension}`;
+    callback(null, filename);
   },
 });
 

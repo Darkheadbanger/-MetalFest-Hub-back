@@ -7,7 +7,7 @@ getAllFestival = (req, res, next) => {
     .then((festivals) => {
       if (!festivals || festivals.length === 0) {
         res.status(404).json({
-          messageError: "There is an error when retrieving the festivals",
+          messageError: "The festival is empty",
         });
       } else {
         const cleanFestival = festivals.map((_id, __v, ...rest) => rest);
