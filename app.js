@@ -26,6 +26,8 @@ app.use("/auth", authRoutes);
 const userRoutes = require("./routes/users.routes");
 app.use("/api", userRoutes);
 
+const festivalRoutes = require("./routes/festival.routes");
+app.use("/festival", festivalRoutes);
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
