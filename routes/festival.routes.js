@@ -24,14 +24,16 @@ const {
 // Create
 router.post("/", isAuthenticated, multer, createFestival);
 
-// Read
-router.get("/festivals", getAllFestival);
+// Read all
+router.get("/", getAllFestival);
 
-// Read one festival
-router.get(`/festivals/:id`, getOneFestival);
-// Update
-router.put(`/festivals/:id`, updateFestival);
-// delete
-router.delete(`/festivals/:id`, deleteFestival);
+// Read one
+router.get("/:id", getOneFestival);
+
+// Update (replace)
+router.put("/:id", isAuthenticated, updateFestival);
+
+// Delete
+router.delete("/:id", isAuthenticated, deleteFestival);
 
 module.exports = router;
