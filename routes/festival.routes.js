@@ -6,6 +6,11 @@ const multer = require("../middleware/multer-config.middleware.js");
 const {
   createFestival,
 } = require("../controller/festival/createFestival.controller.js");
+
+const {
+  getAllFestival,
+} = require("../controller/festival/getAllFestival.controller.js");
+
 const validationCreateFestival = [
   body("festivalName")
     .notEmpty()
@@ -27,6 +32,7 @@ router.post(
 );
 
 // Read
+router.get("/festivals", getAllFestival);
 // Update
 // delete
 
