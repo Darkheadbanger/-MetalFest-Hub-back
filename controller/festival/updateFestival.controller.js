@@ -40,12 +40,16 @@ const updateFestival = async (req, res, next) => {
     updateData.featureBands = String(updateData.featureBands)
       .split(",")
       .map((bands) => bands.trim())
-      .filter(Boolean);
+      .filter((bands) => bands.trim());
   }
 
   // optional image
   if (req.file) {
     updateData.image = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+  }
+
+  if(Object.keys(updateData).length === 0){
+    res.status(400).json({errorMessage: "Can't update with an empty object"})
   }
 
   try {
