@@ -24,11 +24,15 @@ createFestival = (req, res, next) => {
       .json({ errorMessage: `Missing fields: ${missing.join(", ")}` });
   }
 
+  if (!req.file) {
+    return res.status(400).json({ errorMessage: "Image file is required" });
+  }
+
   delete festivalObject._id;
   const festivalData = {
     ...festivalObject,
     image: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
-    createdBy: req.payload_id,
+    createdBy: req.payload && req.payload._id ? req.payload._id : undefined,
   };
   Festival.create(festivalData)
     .then((festival) => {

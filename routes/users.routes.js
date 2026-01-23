@@ -18,7 +18,7 @@ router.get("/users/:id", isAuthenticated, async (req, res, next) => {
     }
     res.status(200).json(foundUserById);
   } catch (error) {
-    next(err);
+      next(error);
   }
 });
 module.exports = router;

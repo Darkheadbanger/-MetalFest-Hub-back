@@ -53,21 +53,48 @@ const updateFestival = async (req, res, next) => {
   }
 
   try {
-    const updated = await Festival.findByIdAndUpdate(id, updateData, {
-      new: true,
-      runValidators: true,
-      context: "query",
-    }).select("-_id -__v");
-    delete updated.toObject()._id;
-    delete updated.toObject().__v;
-    if (!updated) {
-      return res.status(404).json({ messageError: "Festival not found" });
-    }
-    return res
-      .status(200)
-      .json({ messageSuccess: "Festival updated", festival: updated });
+      // Coerce types
+      if (Object.prototype.hasOwnProperty.call(updateData, "price")) {
+        const priceNum = Number(updateData.price);
+        if (Number.isNaN(priceNum)) {
+          return res.status(400).json({ errorMessage: "price must be a number" });
+        }
+        updateData.price = priceNum;
+      }
+
+      if (Object.prototype.hasOwnProperty.call(updateData, "festivalDate")) {
+        const date = new Date(updateData.festivalDate);
+        if (isNaN(date.getTime())) {
+          return res.status(400).json({ errorMessage: "festivalDate must be a valid date" });
+        }
+        updateData.festivalDate = date;
+      }
+
+      // Check unique festivalName (prevent duplicate key on update)
+      if (updateData.festivalName) {
+        const existing = await Festival.findOne({ festivalName: updateData.festivalName }).lean();
+        if (existing && existing._id.toString() !== id) {
+          return res.status(409).json({ messageError: "A festival with that name already exists" });
+        }
+      }
+
+      const updated = await Festival.findByIdAndUpdate(id, updateData, {
+        new: true,
+        runValidators: true,
+        context: "query",
+      }).select("-_id -__v").lean();
+
+      if (!updated) {
+        return res.status(404).json({ messageError: "Festival not found" });
+      }
+
+      return res.status(200).json({ messageSuccess: "Festival updated", festival: updated });
   } catch (error) {
-    return next(error);
+      // handle duplicate-key just in case
+      if (error && error.code === 11000) {
+        return res.status(409).json({ messageError: "Duplicate key error" });
+      }
+      return next(error);
   }
 };
 

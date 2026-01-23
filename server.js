@@ -15,14 +15,14 @@ const normalizePort = (val) => {
 };
 
 const port = normalizePort(process.env.PORT || 5005);
-app.set("Port", port);
+app.set("port", port);
 
 const errorHandler = (error) => {
   if (error.syscall !== "listen") {
     throw error;
   }
 
-  const address = Server.address();
+  const address = server.address();
   const bind =
     typeof address === "string" ? `pipe ${address}` : `port: ${port}`;
 
