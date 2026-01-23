@@ -31,7 +31,7 @@ router.get("/", getAllFestival);
 router.get("/:id", getOneFestival);
 
 // Update (replace)
-router.put("/:id", isAuthenticated, updateFestival);
+router.put("/:id", isAuthenticated, multer, updateFestival);
 
 // Delete
 router.delete("/:id", isAuthenticated, deleteFestival);

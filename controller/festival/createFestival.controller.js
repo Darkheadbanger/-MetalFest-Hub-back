@@ -1,9 +1,9 @@
 const Festival = require("../../models/Festival.model");
 
 createFestival = (req, res, next) => {
-  let thingFestivalObject;
+  let festivalObject;
   try {
-    thingFestivalObject = JSON.parse(req.body.festival);
+    festivalObject = JSON.parse(req.body.festival);
   } catch (e) {
     return res.status(400).json({ errorMessage: "Malformed JSON in festival" });
   }
@@ -17,16 +17,16 @@ createFestival = (req, res, next) => {
     "featureBands",
     "description",
   ];
-  const missing = requiredFields.filter((field) => !thingFestivalObject[field]);
+  const missing = requiredFields.filter((field) => !festivalObject[field]);
   if (missing.length > 0) {
     return res
       .status(400)
       .json({ errorMessage: `Missing fields: ${missing.join(", ")}` });
   }
 
-  delete thingFestivalObject._id;
+  delete festivalObject._id;
   const festivalData = {
-    ...thingFestivalObject,
+    ...festivalObject,
     image: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
     createdBy: req.payload_id,
   };

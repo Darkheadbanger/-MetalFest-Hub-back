@@ -5,7 +5,6 @@ const festivalSchema = new Schema(
     festivalName: {
       type: String,
       required: [true, "The title of your festival is required"],
-      unique: true,
       trim: true,
     },
     // festivalUrl: {
