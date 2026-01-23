@@ -49,7 +49,7 @@ const updateFestival = async (req, res, next) => {
   }
 
   if(Object.keys(updateData).length === 0){
-    res.status(400).json({errorMessage: "Can't update with an empty object"})
+    return res.status(400).json({errorMessage: "Can't update with an empty object"})
   }
 
   try {
