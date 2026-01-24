@@ -5,7 +5,7 @@ getAllFestival = (req, res, next) => {
     .lean()
     .select("-_id -__v")
     .then((festivals) => {
-      // Retourne toujours 200, même si vide
+      // always get all the festival even if it's empty
       res.status(200).json({ festivals });
     })
     .catch((error) => {

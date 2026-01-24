@@ -12,7 +12,9 @@ const deleteFestival = async (req, res, next) => {
     if (!deleted) {
       return res.status(404).json({ messageError: "Festival not found" });
     }
-    return res.status(200).json({ messageSuccess: "Festival deleted", festival: deleted });
+    return res
+      .status(200)
+      .json({ messageSuccess: "Festival deleted", festival: deleted });
   } catch (error) {
     return next(error);
   }

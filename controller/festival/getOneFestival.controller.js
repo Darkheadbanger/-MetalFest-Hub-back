@@ -12,8 +12,7 @@ const getOneFestival = async (req, res, next) => {
     if (!festival) {
       return res.status(404).json({ messageError: "Festival not found" });
     }
-    const { _id, __v, ...cleanRestFestival } = festival;
-    return res.status(200).json({ festival: cleanRestFestival });
+    return res.status(200).json({ festival: festival });
   } catch (error) {
     return next(error);
   }

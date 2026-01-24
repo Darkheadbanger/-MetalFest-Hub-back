@@ -39,7 +39,7 @@ createFestival = (req, res, next) => {
       if (!festival) {
         return res
           .status(400)
-          .json({ messageError: "La requête de festival n'est pas bonne" });
+          .json({ messageError: "The request of the festival is not good" });
       }
       res
         .status(201)
