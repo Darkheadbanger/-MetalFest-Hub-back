@@ -8,7 +8,7 @@ const getOneFestival = async (req, res, next) => {
   }
 
   try {
-    const festival = await Festival.findById(id).lean().select("-_id -__v");
+    const festival = await Festival.findById(id).lean();
     if (!festival) {
       return res.status(404).json({ messageError: "Festival not found" });
     }
