@@ -9,7 +9,7 @@ const MIME_TYPES = {
 };
 console.log("hereeeeeeeeeeeeeeeeeeeee;", __dirname)
 
-const imagesDir = path.join(__dirname, "..", "images");
+const imagesDir = path.join(__dirname, "images");
 console.log("multer imagesDir:", imagesDir);
 if (!fs.existsSync(imagesDir)) {
   try {
