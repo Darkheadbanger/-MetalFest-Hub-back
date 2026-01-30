@@ -7,6 +7,7 @@ const MIME_TYPES = {
   "image/jpeg": "jpeg",
   "image/png": "png",
 };
+console.log("hereeeeeeeeeeeeeeeeeeeee;", __dirname)
 
 const imagesDir = path.join(__dirname, "..", "images");
 console.log("multer imagesDir:", imagesDir);
