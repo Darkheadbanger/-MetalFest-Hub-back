@@ -9,6 +9,7 @@ const MIME_TYPES = {
 };
 
 const imagesDir = path.join(__dirname, "..", "images");
+console.log("multer imagesDir:", imagesDir);
 if (!fs.existsSync(imagesDir)) {
   try {
     fs.mkdirSync(imagesDir, { recursive: true });
