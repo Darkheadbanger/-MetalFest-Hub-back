@@ -35,7 +35,7 @@ const festivalSchema = new Schema(
     },
     image: {
       type: String,
-      required: [true, "Please provide an image URL"],
+      required: [false],
       trim: true,
     },
     description: {
